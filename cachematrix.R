@@ -45,3 +45,91 @@ cacheSolve <- function(x, ...) {
   return(i)               ## return the result of the inverse calculation
   
 }
+
+
+
+
+## EXAMPLE OUTPUT
+## > a <- makeCacheMatrix(matrix(1:4,2))
+
+## > a$get()
+##      [,1] [,2]
+## [1,]    1    3
+## [2,]    2    4
+
+## > a$getInv
+## function() i
+## <environment: 0x0688c898>
+
+## > a$getInv()
+## NULL
+
+## > a$set(matrix(5:8,2))
+
+## > a$get()
+##      [,1] [,2]
+## [1,]    5    7
+## [2,]    6    8
+
+## > cacheSolve(a)
+     ## [,1] [,2]
+## [1,]   -4  3.5
+## [2,]    3 -2.5
+
+## > a$getInv()
+##      [,1] [,2]
+## [1,]   -4  3.5
+## [2,]    3 -2.5
+
+## > cacheSolve(a)
+## getting cached data
+##      [,1] [,2]
+## [1,]   -4  3.5
+## [2,]    3 -2.5
+
+## > b <- a$getInv()
+
+## > b
+##      [,1] [,2]
+## [1,]   -4  3.5
+## [2,]    3 -2.5
+
+## > a$get() %*% b
+##      [,1]         [,2]
+## [1,]    1 2.664535e-15
+## [2,]    0 1.000000e+00
+
+## > a$get() %*% a$getInv()
+##      [,1]         [,2]
+## [1,]    1 2.664535e-15
+## [2,]    0 1.000000e+00
+
+## > source("Ass2_matrix_inverse_cache.R")
+
+## > a <- makeCacheMatrix(matrix(1:4,2))
+
+## > a$get()
+##      [,1] [,2]
+## [1,]    1    3
+## [2,]    2    4
+
+## > a$getInv()
+## NULL
+
+## > cacheSolve(a)
+##      [,1] [,2]
+## [1,]   -2  1.5
+## [2,]    1 -0.5
+
+## > cacheSolve(a)
+## getting cached data
+##      [,1] [,2]
+## [1,]   -2  1.5
+## [2,]    1 -0.5
+
+## > b <- a$getInv()
+
+## > a$get() %*% a$getInv()
+##      [,1] [,2]
+## [1,]    1    0
+## [2,]    0    1
